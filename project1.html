@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project-I</title>
+    <style>
+        /* General Reset and Box Sizing */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styling with Background Animation */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(120deg, #2980b9, #6dd5fa, #ffffff);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Heading Styling */
+        h1 {
+            color: #ffffff;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Container Styling */
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .container:hover {
+            transform: scale(1.05);
+        }
+
+        /* Dropdown Button Styling */
+        .dropdown {
+            position: relative;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .dropbtn {
+            width: 100%;
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            text-align: left;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .dropbtn:hover {
+            background-color: #34495e;
+        }
+
+        /* Dropdown Content Styling */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #ecf0f1;
+            min-width: 100%;
+            max-height: 200px;
+            overflow-y: auto;
+            border-radius: 6px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.3s ease;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #bdc3c7;
+        }
+
+        .show {
+            display: block;
+        }
+
+        /* Search Container Styling */
+        .search-container {
+            display: flex;
+            width: 100%;
+        }
+
+        #searchInput {
+            flex-grow: 1;
+            padding: 15px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        #searchInput:focus {
+            border-color: #2980b9;
+        }
+
+        button {
+            padding: 15px;
+            font-size: 16px;
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 6px;
+            margin-left: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #34495e;
+        }
+
+        /* Media Query for Responsiveness */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            .dropbtn, button, #searchInput {
+                padding: 12px;
+                font-size: 14px;
+            }
+
+            .dropdown-content a {
+                padding: 10px 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>PROJECT-I</h1>
+    <div class="container">
+        <div class="dropdown">
+            <button class="dropbtn" onclick="toggleDropdown()">Everything <span>&#9662;</span></button>
+            <div class="dropdown-content" id="myDropdown">
+                <a href="#" onclick="updateSearchPlaceholder('Everything')">Everything</a>
+                <a href="#" onclick="updateSearchPlaceholder('Software Development')">Software Development</a>
+                <a href="#" onclick="updateSearchPlaceholder('Web Development')">Web Development</a>
+                <a href="#" onclick="updateSearchPlaceholder('Data Analyst')">Data Analyst</a>
+                <a href="#" onclick="updateSearchPlaceholder('IT Consultant')">IT Consultant</a>
+                <a href="#" onclick="updateSearchPlaceholder('Network Administrator')">Network Administrator</a>
+            </div>
+        </div>
+
+        <div class="search-container">
+            <input type="text" placeholder="Search in Everything" id="searchInput">
+            <button onclick="performSearch()">Search</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleDropdown() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        function updateSearchPlaceholder(category) {
+            document.getElementById("searchInput").placeholder = 'Search in ' + category;
+            document.querySelector(".dropbtn").textContent = category + ' \u25BE'; // Update dropdown button text
+            toggleDropdown(); // Close the dropdown after selection
+        }
+
+        function performSearch() {
+            alert('Searching for: ' + document.getElementById("searchInput").value);
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
